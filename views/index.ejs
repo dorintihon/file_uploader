@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to the File Uploader</h1>
+    <%- if (user) { %>
+        <p>Hello, <%= user.username %>! You are logged in.</p>
+    <% } else if (showRegister) { %>
+        <%- include('forms/register') %>
+    <% } else { %>
+        <%- include('forms/auth') %>
+    <% } %>
+    <p><a href="/register">Register</a> if you don't have an account.</p>
+</body>
+</html>
