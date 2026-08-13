@@ -1,7 +1,13 @@
-const {Router} = require('express');
+import { Router } from "express";
 const indexRouter = Router();
-const indexController = require('../controllers/indexController');
+const indexController = await import("../controllers/indexController.js");
+const authController = await import("../controllers/authController.js");
 
 indexRouter.get('/', indexController.getHomePage);
 
-module.exports = indexRouter;
+indexRouter.get('/login', authController.getLogin);
+indexRouter.get('/register', authController.getRegister);
+indexRouter.post('/login', authController.postLogin);
+indexRouter.post('/register', authController.postRegister);
+
+export { indexRouter };

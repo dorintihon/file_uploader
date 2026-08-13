@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Welcome to the File Uploader</h1>
-    <%- if (user) { %>
+    <% if (user) { %>
         <p>Hello, <%= user.username %>! You are logged in.</p>
     <% } else if (showRegister) { %>
         <%- include('forms/register') %>

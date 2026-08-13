@@ -6,8 +6,13 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import prisma from "./db/prisma.js";
 
 import passport from "./config/passport.js";
+import { indexRouter } from "./routes/indexRouter.js";
+import path from "node:path";
 
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(process.cwd(), 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -36,6 +41,8 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
 });
+
+app.use("/", indexRouter);
 
 app.get("/test", (req, res) => {
     console.log(req.user);
