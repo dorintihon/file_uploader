@@ -3,7 +3,7 @@ import express from "express";
 import session from "express-session";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
-import prisma from "./db/prisma.js";
+import { prisma } from "./lib/prisma.js";
 
 import passport from "./config/passport.js";
 import { indexRouter } from "./routes/indexRouter.js";

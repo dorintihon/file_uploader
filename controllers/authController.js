@@ -1,3 +1,6 @@
+import bcrypt from 'bcrypt';
+import { getUserByUsername, createUser } from '../db/queries.js';
+
 function getLogin(req, res) {
     res.render('forms/auth', { title: 'Login', user: req.user, showRegister: false });
 }
@@ -11,14 +14,20 @@ function postLogin(req, res) {
     // Handle login logic
 }
 
-function postRegister(req, res) {
+async function postRegister(req, res) {
     const { username, password } = req.body;
-    // Handle registration logic
-    
-
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await createUser(username, hashedPassword);
+        console.log(`User ${username} registered successfully.`);
+        res.redirect('/login');
+    } catch (error) {
+        console.error("Error during registration:", error);
+        res.status(500).send("Internal Server Error");
+    }
 }
 
-export{
+export {
     getLogin,
     getRegister,
     postLogin,
