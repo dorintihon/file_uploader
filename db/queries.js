@@ -1,9 +1,11 @@
 import { prisma } from "../lib/prisma.js";
 
+
 async function getUserByUsername(username) {
   const user = await prisma.user.findUnique({
     where: { username },
   });
+  console.log(`getUserByUsername: Found user: ${user ? user.username : 'None'}`);
   return user;
 }
 
@@ -21,4 +23,8 @@ async function createUser(username, password) {
   return user;
 }
 
-export { getUserByUsername, findUserById, createUser };
+export { 
+  getUserByUsername, 
+  findUserById, 
+  createUser
+};

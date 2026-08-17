@@ -9,11 +9,15 @@
     <h1>Welcome to the File Uploader</h1>
     <% if (user) { %>
         <p>Hello, <%= user.username %>! You are logged in.</p>
-    <% } else if (showRegister) { %>
-        <%- include('forms/register') %>
+        <form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
     <% } else { %>
-        <%- include('forms/auth') %>
+        <% if (showRegister) { %>
+            <%- include('forms/register') %>
+        <% } else { %>
+            <%- include('forms/auth') %>
+        <% } %>
     <% } %>
-    <p><a href="/register">Register</a> if you don't have an account.</p>
 </body>
 </html>

@@ -9,6 +9,7 @@ import passport from "./config/passport.js";
 import { indexRouter } from "./routes/indexRouter.js";
 import path from "node:path";
 
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -37,23 +38,19 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    next();
-});
 
 app.use("/", indexRouter);
 
-app.get("/test", (req, res) => {
-    console.log(req.user);
-    console.log(req.isAuthenticated?.());
-    res.send("OK");
+app.get("/test-session", (req, res) => {
+  req.session.count = (req.session.count || 0) + 1;
+
+  console.log("Session ID:", req.sessionID);
+  console.log("Session:", req.session);
+
+  res.send(`You visited ${req.session.count} times`);
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT} link: http://localhost:${PORT}`);
-}); 
-
-
-
+});

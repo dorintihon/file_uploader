@@ -5,9 +5,10 @@ const authController = await import("../controllers/authController.js");
 
 indexRouter.get('/', indexController.getHomePage);
 
-indexRouter.get('/login', authController.getLogin);
+
 indexRouter.get('/register', authController.getRegister);
 indexRouter.post('/login', authController.postLogin);
 indexRouter.post('/register', authController.postRegister);
+indexRouter.post('/logout', authController.postLogout);
 
 export { indexRouter };
