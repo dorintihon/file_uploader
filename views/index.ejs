@@ -9,6 +9,7 @@
     <h1>Welcome to the File Uploader</h1>
     <% if (user) { %>
         <p>Hello, <%= user.username %>! You are logged in.</p>
+        <%- include('forms/upload') %>
         <form action="/logout" method="POST">
             <button type="submit">Logout</button>
         </form>
