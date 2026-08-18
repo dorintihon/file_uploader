@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { getUserByUsername, createUser } from '../db/queries.js';
+import { createUser } from '../db/queries.js';
 import passport from '../config/passport.js';
 
 function getLogin(req, res) {

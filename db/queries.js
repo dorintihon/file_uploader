@@ -29,8 +29,22 @@ async function createUser(username, password) {
   return user;
 }
 
-export { 
-  getUserByUsername, 
-  findUserById, 
-  createUser
+
+//Folders
+
+async function getFolderById(folderId, userId) {
+  const folder = await prisma.folder.findFirst({
+    where: { 
+      id: folderId,
+      userId: userId
+    },
+  });
+  return folder;
+}
+
+export {
+  getUserByUsername,
+  findUserById,
+  createUser,
+  getFolderById
 };
