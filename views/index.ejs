@@ -9,10 +9,18 @@
     <h1>Welcome to the File Uploader</h1>
     <% if (user) { %>
         <p>Hello, <%= user.username %>! You are logged in.</p>
-        <%- include('forms/upload') %>
         <form action="/logout" method="POST">
             <button type="submit">Logout</button>
         </form>
+
+        <h2>Your Folders</h2>
+        <ul>
+            <% user.folder.forEach(function(folder) { %>
+                <li>
+                    <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+                </li>
+            <% }); %>
+        </ul>
     <% } else { %>
         <% if (showRegister) { %>
             <%- include('forms/register') %>
