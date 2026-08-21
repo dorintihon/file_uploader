@@ -7,8 +7,10 @@
 </head>
 <body>
     <h1><%= folder.name %></h1>
-    <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete</button>
-    </form>
+    <li>
+        <% folder.files.forEach(function(file) { %>
+            <a href="/uploads/<%= file.filename %>"><%= file.originalname %></a><br>
+        <% }); %>
+    </li>
 </body>
 </html>

@@ -7,7 +7,7 @@ async function getFolder(req, res) {
     if (!folder) {
         return res.status(404).send("Folder not found");
     }
-    res.render("forms/folder", { folder });
+    res.render("forms/folder", { folder, files: folder.files });
 }
 
 export { getFolder };

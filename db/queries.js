@@ -38,6 +38,9 @@ async function getFolderById(folderId, userId) {
       id: folderId,
       userId: userId
     },
+    include: {
+      files: true,
+    },
   });
   return folder;
 }
