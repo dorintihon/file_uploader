@@ -6,5 +6,6 @@ import { ensureAuthenticated } from "../middleware/authMiddleware.js";
 folderRouter.use(ensureAuthenticated);
 
 folderRouter.get('/:id', folderController.getFolder);
+folderRouter.post('/:id/delete', folderController.deleteFolder);
 
 export { folderRouter };

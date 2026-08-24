@@ -7,10 +7,16 @@
 </head>
 <body>
     <h1><%= folder.name %></h1>
-    <li>
-        <% folder.files.forEach(function(file) { %>
-            <a href="/uploads/<%= file.filename %>"><%= file.originalname %></a><br>
+    <form action="/folders/<%=folder.id %>/delete" method="POST">
+        <button type="submit">Delete Folder</button>
+    </form>
+    <a href="/folders/<%= folder.id %>/files/addfile">New File</a>
+    <ul>
+        <% files.forEach(function(file) { %>
+            <li>
+                <a href="/uploads/<%= file.filename %>"><%= file.originalname %></a>
+            </li>
         <% }); %>
-    </li>
+    </ul>
 </body>
 </html>

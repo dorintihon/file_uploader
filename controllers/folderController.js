@@ -1,4 +1,4 @@
-import { getFolderById } from '../db/queries.js';
+import { getFolderById, deleteFolderById } from '../db/queries.js';
 
 async function getFolder(req, res) {
     const folderId = parseInt(req.params.id, 10);
@@ -10,4 +10,17 @@ async function getFolder(req, res) {
     res.render("forms/folder", { folder, files: folder.files });
 }
 
-export { getFolder };
+async function deleteFolder(req, res) {
+    const folderId = parseInt(req.params.id, 10);
+    const userId = req.user.id;
+
+    try {
+        await deleteFolderById(folderId, userId);
+        res.redirect("/");
+    } catch (error) {
+        console.error("Error deleting folder:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+export { getFolder, deleteFolder };

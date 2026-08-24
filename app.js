@@ -8,6 +8,7 @@ import { prisma } from "./lib/prisma.js";
 import passport from "./config/passport.js";
 import { indexRouter } from "./routes/indexRouter.js";
 import { folderRouter } from "./routes/folderRouter.js";  
+import { fileRouter } from "./routes/fileRouter.js";
 import path from "node:path";
 
 
@@ -43,6 +44,7 @@ app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/folders", folderRouter);
+app.use("/folders/:folderId/files", fileRouter);
 
 app.get("/test-session", (req, res) => {
   req.session.count = (req.session.count || 0) + 1;
