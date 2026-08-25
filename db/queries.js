@@ -45,7 +45,7 @@ async function getFolderById(folderId, userId) {
   return folder;
 }
 
-async function createFolder(name, userId) {
+async function createFolderInDB(name, userId) {
   const folder = await prisma.folder.create({
     data: {
       name,
@@ -65,11 +65,25 @@ async function deleteFolderById(folderId, userId) {
   return folder;
 }
 
+async function editFolderNameInDB(folderId, userId, newName) {  
+  const folder = await prisma.folder.updateMany({
+    where: {
+      id: folderId,
+      userId: userId
+    },
+    data: {
+      name: newName
+    }
+  });
+  return folder;
+}
+
 export {
   getUserByUsername,
   findUserById,
   createUser,
   getFolderById,
   deleteFolderById,
-  createFolder
+  createFolderInDB,
+  editFolderNameInDB
 };
