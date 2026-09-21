@@ -6,8 +6,26 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><%= folder.name %></h1>
-    TODO: Add edit folder name functionality
+    <div id="folder-title">
+        <h1 id="folder-name"><%= folder.name %></h1>
+        <button type="button" id="edit-btn">Edit</button>
+    </div>
+    <form
+        id="edit-form"
+        action="/folders/<%= folder.id %>/edit"
+        method="POST"
+        style="display: none;"
+    >
+        <input
+            type="text"
+            name="name"
+            value="<%= folder.name %>"
+            required
+        >
+
+        <button type="submit">Save</button>
+        <button type="button" id="cancel-btn">Cancel</button>
+    </form>
     <form action="/folders/<%=folder.id %>/delete" method="POST">
         <button type="submit">Delete Folder</button>
     </form>
@@ -19,5 +37,24 @@
             </li>
         <% }); %>
     </ul>
+
+    <script>
+        const folderTitle = document.getElementById("folder-title");
+        const editForm = document.getElementById("edit-form");
+        const editBtn = document.getElementById("edit-btn");
+        const cancelBtn = document.getElementById("cancel-btn");
+
+        editBtn.addEventListener("click", () => {
+            folderTitle.style.display = "none";
+            editForm.style.display = "block";
+
+            editForm.querySelector("input").focus();
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            editForm.style.display = "none";
+            folderTitle.style.display = "block";
+        });
+    </script>
 </body>
 </html>
