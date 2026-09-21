@@ -16,7 +16,11 @@ async function findUserById(id) {
   const user = await prisma.user.findUnique({
     where: { id },
     include: {
-      folder: true,
+      folder: {
+        orderBy: {
+          id: 'asc',
+        },
+      }
     },
   });
   return user;

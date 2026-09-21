@@ -44,7 +44,7 @@ async function editFolderName(req, res) {
 
     try {
         await editFolderNameInDB(folderId, userId, name);
-        res.redirect(`/folders/${folderId}`);
+        res.json({ success: true, name: name, message: "Folder name updated successfully" });
     } catch (error) {
         console.error("Error editing folder name:", error);
         res.status(500).send("Internal Server Error");

@@ -43,12 +43,36 @@
         const editForm = document.getElementById("edit-form");
         const editBtn = document.getElementById("edit-btn");
         const cancelBtn = document.getElementById("cancel-btn");
+        const folderName = document.getElementById("folder-name");
 
         editBtn.addEventListener("click", () => {
             folderTitle.style.display = "none";
             editForm.style.display = "block";
 
             editForm.querySelector("input").focus();
+        });
+
+        editForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const response = await fetch(editForm.action, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: editForm.querySelector("input").value
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    folderName.textContent = result.name;
+
+                    editForm.style.display = "none";
+                    folderTitle.style.display = "block";
+                }
         });
 
         cancelBtn.addEventListener("click", () => {
