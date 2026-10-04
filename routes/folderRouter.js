@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { fileRouter } from "./fileRouter.js";
 const folderRouter = Router();
 
 const folderController = await import(
@@ -8,6 +9,7 @@ const folderController = await import(
 import { ensureAuthenticated } from "../middleware/authMiddleware.js";
 
 folderRouter.use(ensureAuthenticated);
+folderRouter.use("/:folderId/files", fileRouter);
 
 // specific routes first
 folderRouter.get('/add_folder', folderController.addFolderForm);

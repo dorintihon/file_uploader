@@ -82,6 +82,21 @@ async function editFolderNameInDB(folderId, userId, newName) {
   return folder;
 }
 
+// Files
+
+async function createFileInDB(name, type, url, folderId, userId) {
+  const file = await prisma.file.create({
+    data: {
+      name,
+      type,
+      url,
+      folderId,
+      userId
+    },
+  });
+  return file;
+} 
+
 export {
   getUserByUsername,
   findUserById,
@@ -89,5 +104,7 @@ export {
   getFolderById,
   deleteFolderById,
   createFolderInDB,
-  editFolderNameInDB
+  editFolderNameInDB,
+  createFileInDB
 };
+

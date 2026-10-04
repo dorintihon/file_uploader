@@ -3,6 +3,7 @@ import { getFolderById, deleteFolderById, createFolderInDB, editFolderNameInDB }
 async function getFolder(req, res) {
     // console.log("params:", req.params);
     // console.log("id:", req.params.id);
+    // console.log("user:", req.user.id);
     const folderId = parseInt(req.params.id, 10);
     const userId = req.user.id;
     const folder = await getFolderById(folderId, userId);
