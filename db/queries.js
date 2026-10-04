@@ -84,18 +84,32 @@ async function editFolderNameInDB(folderId, userId, newName) {
 
 // Files
 
-async function createFileInDB(name, type, url, folderId, userId) {
+async function createFileInDB(name, type, url, folderId, userId, size) {
   const file = await prisma.file.create({
     data: {
       name,
       type,
       url,
       folderId,
-      userId
+      userId,
+      size
     },
   });
   return file;
 } 
+
+async function getFileById(fileId, userId, folderId) {
+  const file = await prisma.file.findFirst({
+    where: {
+      id: fileId,
+      userId: userId,
+      folderId: folderId  
+    }
+  });
+  console.log(`the file is: ${file ? file.name : 'None'} and it was created at ${file ? file.createdAt : 'N/A'}`);
+  return file;
+
+}
 
 export {
   getUserByUsername,
@@ -105,6 +119,7 @@ export {
   deleteFolderById,
   createFolderInDB,
   editFolderNameInDB,
-  createFileInDB
+  createFileInDB,
+  getFileById
 };
 

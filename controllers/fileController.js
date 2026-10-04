@@ -1,4 +1,4 @@
-import { getFolderById, createFileInDB } from '../db/queries.js';
+import { getFolderById, createFileInDB, getFileById } from '../db/queries.js';
 import multer from "multer";
 import cloudinary from '../config/cloudinary.js';
 
@@ -18,7 +18,7 @@ async function addFileForm(req, res) {
 }
 
 async function postUpload(req, res) {
-    console.log("params:", req.params);
+    // console.log("params:", req.params);
     const folderId = parseInt(req.params.folderId, 10);
     const userId = req.user.id;
     const folder = await getFolderById(folderId, userId);
@@ -52,6 +52,7 @@ async function postUpload(req, res) {
                                 req.file.originalname,
                                 req.file.mimetype,
                                 result.secure_url,
+                                req.file.size,
                                 folderId,
                                 userId
                             );
@@ -82,11 +83,13 @@ async function postUpload(req, res) {
 }
 
 async function getFile(req, res) {
-    const fileId = parseInt(req.params.id, 10);
+    console.log("params:", req.params);
+    const fileId = parseInt(req.params.fileId, 10);
     const userId = req.user.id;
+    const folderId = parseInt(req.params.folderId, 10);
 
     try {
-        const file = await getFileById(fileId, userId);
+        const file = await getFileById(fileId, userId, folderId);
         if (!file) {
             return res.status(404).send("File not found");
         }

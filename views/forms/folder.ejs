@@ -33,7 +33,7 @@
     <ul>
         <% files.forEach(function(file) { %>
             <li>
-                <a href="/uploads/<%= file.name %>"><%= file.name %></a>
+                <a href="/folders/<%= folder.id %>/files/<%= file.id %>"><%= file.name %></a>
             </li>
         <% }); %>
     </ul>

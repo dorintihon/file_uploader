@@ -7,13 +7,17 @@
 </head>
 <body>
     <h1><%= file.name %></h1>
-    <p>Size: <%= file.size %></p>
-    <p>Uploaded: <%= file.uploadedAt %></p>
+    <p>Size: <%= file.size %> bytes</p>
+    <p>Uploaded: <%= file.createdAt %></p>
 
 
     <p>TO DO : Make the download button work </p>
     <form action="/files/<%= file.id %>?_method=DOWNLOAD" method="POST">
         <button type="submit">DOWNLOAD</button>
+    </form>
+
+    <form action="/files/<%= file.id %>?_method=DELETE" method="POST">
+        <button type="submit">DELETE</button>
     </form>
 </body>
 </html>
