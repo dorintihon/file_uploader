@@ -11,16 +11,16 @@ async function addFileForm(req, res) {
     res.render("forms/addFile", { folder });
 }
 
-async function addFile(req, res) {
+async function createFile(req, res) {
     const { name, folderId } = req.body;
     const userId = req.user.id;
 
     try {
         await createFile(name, folderId, userId);
-        console.log(`File ${name} added successfully.`);
+        console.log(`File ${name} created successfully.`);
         res.redirect(`/folders/${folderId}`);
     } catch (error) {
-        console.error("Error adding file:", error);
+        console.error("Error creating file:", error);
         res.status(500).send("Internal Server Error");
     }
 }
@@ -41,4 +41,4 @@ async function getFile(req, res) {
     }
 }
 
-export { addFileForm, addFile, getFile };
+export { addFileForm, createFile, getFile };

@@ -1,9 +1,16 @@
 import { getFolderById, deleteFolderById, createFolderInDB, editFolderNameInDB } from '../db/queries.js';
 
 async function getFolder(req, res) {
+    // console.log("params:", req.params);
+    // console.log("id:", req.params.id);
     const folderId = parseInt(req.params.id, 10);
     const userId = req.user.id;
     const folder = await getFolderById(folderId, userId);
+    
+    if (Number.isNaN(folderId)) {
+        return res.status(404).send("Folder not found");
+    }
+
     if (!folder) {
         return res.status(404).send("Folder not found");
     }

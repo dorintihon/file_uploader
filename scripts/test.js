@@ -70,6 +70,7 @@ async function deleteTestFolderForUser(username, id) {
   console.log(`Folder deleted for user ${username}`);
 }
 
+
 // Example usage:
 // deleteTestFolderForUser("gimiri", 1);
 

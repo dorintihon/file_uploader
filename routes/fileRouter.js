@@ -7,7 +7,7 @@ fileRouter.use(ensureAuthenticated);
 
 
 fileRouter.get('/addFile', fileController.addFileForm);
-fileRouter.post('/addFile', fileController.addFile);
+fileRouter.post('/addFile', fileController.createFile);
 fileRouter.get('/:id', fileController.getFile);
 
 export { fileRouter };
