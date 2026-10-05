@@ -149,7 +149,7 @@ async function getFileById(fileId, userId, folderId) {
       folderId: folderId  
     }
   });
-  console.log(`the file is: ${file ? file.name : 'None'} and it was created at ${file ? file.createdAt : 'N/A'}`);
+  // console.log(`the file is: ${file ? file.name : 'None'} and it was created at ${file ? file.createdAt : 'N/A'}`);
   return file;
 
 }
@@ -204,7 +204,7 @@ async function deleteFolderFromCloudinary(folderId) {
       console.log("Cloudinary folder already deleted.");
       return null;
     }
-    
+
     console.error("Error deleting folder from Cloudinary:", error);
   }
 }

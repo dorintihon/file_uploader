@@ -19,7 +19,7 @@ async function getFolder(req, res) {
 }
 
 async function createFolder(req, res) {
-    console.log("Creating folder with data:", req.body);
+    // console.log("Creating folder with data:", req.body);
     const { name } = req.body;
     const userId = req.user.id;
 

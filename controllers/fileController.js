@@ -5,7 +5,7 @@ import cloudinary from '../config/cloudinary.js';
 const upload = multer({ storage: multer.memoryStorage() });
 
 async function addFileForm(req, res) {
-    console.log("params:", req.params);
+    // console.log("params:", req.params);
 
     const folderId = parseInt(req.params.folderId, 10);
     const userId = req.user.id;
@@ -86,7 +86,7 @@ async function postUpload(req, res) {
 }
 
 async function getFile(req, res) {
-    console.log("params:", req.params);
+    // console.log("params:", req.params);
     const fileId = parseInt(req.params.fileId, 10);
     const userId = req.user.id;
     const folderId = parseInt(req.params.folderId, 10);
@@ -118,4 +118,19 @@ async function deleteFile(req, res) {
     }
 }
 
-export { addFileForm, postUpload, getFile, deleteFile };
+async function downloadFile(req, res) {
+  const fileId = Number(req.params.fileId);
+  const folderId = Number(req.params.folderId);
+  const userId = req.user.id;
+
+  const file = await getFileById(fileId, userId, folderId);
+
+  if (!file) {
+    return res.status(404).send("File not found");
+  }
+
+  
+  return res.redirect(file.url);
+}
+
+export { addFileForm, postUpload, getFile, deleteFile, downloadFile };
