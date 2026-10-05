@@ -16,8 +16,8 @@
         <button type="submit">DOWNLOAD</button>
     </form>
 
-    <form action="/files/<%= file.id %>?_method=DELETE" method="POST">
-        <button type="submit">DELETE</button>
+    <form action="/folders/<%= folderId %>/files/<%= file.id %>/delete" method="POST">
+        <button type="submit">Delete File</button>
     </form>
 </body>
 </html>

@@ -16,8 +16,8 @@ folderRouter.get('/add_folder', folderController.addFolderForm);
 folderRouter.post('/add_folder', folderController.createFolder);
 
 // dynamic routes after
-folderRouter.get('/:id', folderController.getFolder);
-folderRouter.post('/:id/delete', folderController.deleteFolder);
-folderRouter.post('/:id/edit', folderController.editFolderName);
+folderRouter.get('/:folderId', folderController.getFolder);
+folderRouter.post('/:folderId/delete', folderController.deleteFolder);
+folderRouter.post('/:folderId/edit', folderController.editFolderName);
 
 export { folderRouter };

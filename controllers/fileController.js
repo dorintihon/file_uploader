@@ -1,4 +1,4 @@
-import { getFolderById, createFileInDB, getFileById } from '../db/queries.js';
+import { getFolderById, createFileInDB, getFileById, deleteFileById } from '../db/queries.js';
 import multer from "multer";
 import cloudinary from '../config/cloudinary.js';
 
@@ -49,15 +49,18 @@ async function postUpload(req, res) {
 
                         try {
                             await createFileInDB(
-                                req.file.originalname,
-                                req.file.mimetype,
-                                result.secure_url,
-                                req.file.size,
-                                folderId,
-                                userId
+                                {
+                                    name: req.file.originalname,
+                                    type: req.file.mimetype,
+                                    url: result.secure_url,
+                                    size: req.file.size,
+                                    folderId,
+                                    userId,
+                                    publicId: result.public_id
+                                }
                             );
 
-                            console.log("File uploaded successfully:", result);
+                            // console.log("File uploaded successfully:", result);
 
                             res.redirect(`/folders/${folderId}`);
                         } catch (error) {
@@ -93,11 +96,26 @@ async function getFile(req, res) {
         if (!file) {
             return res.status(404).send("File not found");
         }
-        res.render("forms/file", { file });
+        res.render("forms/file", { file, folderId });
     } catch (error) {
         console.error("Error retrieving file:", error);
         res.status(500).send("Internal Server Error");
     }
 }
 
-export { addFileForm, postUpload, getFile };
+async function deleteFile(req, res) {
+    // console.log("params:", req.params);
+    const fileId = parseInt(req.params.fileId, 10);
+    const userId = req.user.id;
+    const folderId = parseInt(req.params.folderId, 10);
+
+    try {
+        await deleteFileById(fileId, userId, folderId);
+        res.redirect(`/folders/${folderId}`);
+    } catch (error) {
+        console.error("Error deleting file:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+export { addFileForm, postUpload, getFile, deleteFile };

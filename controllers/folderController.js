@@ -4,7 +4,7 @@ async function getFolder(req, res) {
     // console.log("params:", req.params);
     // console.log("id:", req.params.id);
     // console.log("user:", req.user.id);
-    const folderId = parseInt(req.params.id, 10);
+    const folderId = parseInt(req.params.folderId, 10);
     const userId = req.user.id;
     const folder = await getFolderById(folderId, userId);
     
@@ -33,7 +33,7 @@ async function createFolder(req, res) {
 }   
 
 async function deleteFolder(req, res) {
-    const folderId = parseInt(req.params.id, 10);
+    const folderId = parseInt(req.params.folderId, 10);
     const userId = req.user.id;
 
     try {
@@ -46,7 +46,7 @@ async function deleteFolder(req, res) {
 }
 
 async function editFolderName(req, res) {
-    const folderId = parseInt(req.params.id, 10);
+    const folderId = parseInt(req.params.folderId, 10);
     const userId = req.user.id;
     const { name } = req.body;
 
