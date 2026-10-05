@@ -13,6 +13,8 @@ import path from "node:path";
 
 const app = express();
 
+app.use(express.static(path.join(process.cwd(), 'public')));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(process.cwd(), 'views'));
 

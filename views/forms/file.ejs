@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <a href="/folders/<%= folderId %>">Back to Folder</a>
@@ -15,12 +16,12 @@
 
     
     <form action="/folders/<%= folderId %>/files/<%= file.id %>/download" method="GET" target="_blank">
-        <button type="submit">View</button>
+        <button type="submit" class="btn">View</button>
     </form>
 
 
     <form action="/folders/<%= folderId %>/files/<%= file.id %>/delete" method="POST">
-        <button type="submit">Delete File</button>
+        <button type="submit" class="btn">Delete File</button>
     </form>
 </body>
 </html>

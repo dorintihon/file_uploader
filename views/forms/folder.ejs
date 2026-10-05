@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <a href="/">Back to Home</a>
     <div id="folder-title">
         <h1 id="folder-name"><%= folder.name %></h1>
-        <button type="button" id="edit-btn">Edit</button>
+        <button type="button" id="edit-btn" class="btn">Edit</button>
     </div>
     <form
         id="edit-form"
@@ -24,13 +25,13 @@
             required
         >
 
-        <button type="submit">Save</button>
-        <button type="button" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn">Save</button>
+        <button type="button" id="cancel-btn" class="btn">Cancel</button>
     </form>
     <form action="/folders/<%=folder.id %>/delete" method="POST">
-        <button type="submit">Delete Folder</button>
+        <button type="submit" class="btn">Delete Folder</button>
     </form>
-    <a href="/folders/<%= folder.id %>/files/addfile">New File</a>
+    <a href="/folders/<%= folder.id %>/files/addfile" class="btn">New File</a>
     <ul>
         <% files.forEach(function(file) { %>
             <li>

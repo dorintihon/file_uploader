@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Welcome to the File Uploader</h1>
     <% if (user) { %>
         <p>Hello, <%= user.username %>! You are logged in.</p>
         <form action="/logout" method="POST">
-            <button type="submit">Logout</button>
+            <button type="submit" class="btn">Logout</button>
         </form>
 
         <h2>Your Folders</h2>
-        <a href="/folders/add_folder">New Folder</a>
+        <a href="/folders/add_folder" class="btn">New Folder</a>
         <ul>
             <% user.folder.forEach(function(folder) { %>
                 <li>

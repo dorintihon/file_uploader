@@ -1,0 +1,16 @@
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: #eee;
+    color: black;
+    text-decoration: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ddd;
+}
