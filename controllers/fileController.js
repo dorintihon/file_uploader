@@ -3,6 +3,7 @@ import multer from "multer";
 import cloudinary from '../config/cloudinary.js';
 
 const upload = multer({ storage: multer.memoryStorage() });
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 async function addFileForm(req, res) {
     // console.log("params:", req.params);
@@ -30,9 +31,17 @@ async function postUpload(req, res) {
     try {
 
         upload.single("uploaded_file")(req, res, async (err) => {
+            if (!req.file) {
+                return res.status(400).send("No file uploaded");
+            }
+            
             if (err) {
                 console.error("Error during file upload:", err);
                 return res.status(500).send("Internal Server Error");
+            }
+
+            if (req.file.size > MAX_FILE_SIZE) {
+                return res.status(400).send("File size exceeds 10MB limit");
             }
 
             try {
